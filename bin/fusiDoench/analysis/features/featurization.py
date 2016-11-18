@@ -3,7 +3,7 @@ import time
 import numpy as np
 import Bio.SeqUtils as SeqUtil
 import Bio.Seq as Seq
-import util
+import util_new as util
 import sys
 import Bio.SeqUtils.MeltingTemp as Tm
 import pickle

@@ -160,3 +160,14 @@ def get_ranks(y, thresh=0.8, prefix="", flip=False, col_name='score'):
     y_quantized.columns = [prefix + "quantized"]
 
     return y_rank, y_rank_raw, y_threshold, y_quantized
+
+def get_gene_sequence(gene_name):
+    try:
+        gene_file = '../gene_sequences/%s_sequence.txt' % gene_name
+        with open(gene_file, 'rb') as f:
+            seq = f.read()
+            seq = seq.replace('\r\n', '')
+    except:
+        raise Exception("could not find gene sequence file %s, please see examples and generate one for your gene as needed, with this filename" % gene_file)
+
+    return seq

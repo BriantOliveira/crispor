@@ -52,18 +52,6 @@ def datestamp(appendrandom=False):
         s += "_" + str(random.random())[2:]
     return s
 
-
-def get_gene_sequence(gene_name):
-    try:
-        gene_file = '../gene_sequences/%s_sequence.txt' % gene_name
-        with open(gene_file, 'rb') as f:
-            seq = f.read()
-            seq = seq.replace('\r\n', '')
-    except:
-        raise Exception("could not find gene sequence file %s, please see examples and generate one for your gene as needed, with this filename" % gene_file)
-
-    return seq
-
     # gene_positions = {'CCDC101': [28553928,28591790]}
     # search = Entrez.esearch(db="gene", term='%s[Gene Name] AND Homo Sapiens[Organism]' % (gene_name))
     # records = Entrez.read(search)
@@ -115,7 +103,7 @@ def ranktrafo(data):
         RV[:,i] = sp.sqrt(2) * sp.special.erfinv(2*rank-1)
 
     return RV.flatten()
-    
+
 
 def plot_metrics(metrics, truth_and_predictions, target_genes, run_label, color=None, filename_prefix=None, learn_options=None):
 
