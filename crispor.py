@@ -2540,7 +2540,7 @@ def findOfftargetsBwa(queue, batchId, batchBase, faFname, genome, pam, bedFname)
     seqLen = GUIDELEN
 
     bwaM = MFAC*MAXOCC # -m is queue size in bwa
-    cmd = "$BIN/bwa aln -o 1 -m %(bwaM)s -n %(maxDiff)d -k %(maxDiff)d -N -l %(seqLen)d %(genomeDir)s/%(genome)s/%(genome)s.fa %(faFname)s > %(saFname)s" % locals()
+    cmd = "$BIN/bwa aln -o 0 -m %(bwaM)s -n %(maxDiff)d -k %(maxDiff)d -N -l %(seqLen)d %(genomeDir)s/%(genome)s/%(genome)s.fa %(faFname)s > %(saFname)s" % locals()
     runCmd(cmd)
 
     queue.startStep(batchId, "saiToBed", convertMsg)

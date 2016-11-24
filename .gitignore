@@ -1,3 +1,4 @@
-*.py[cod]
 temp/*
-bin/Darwin/WU-CRISPR/result/*
+*.pyc
+*.xls
+*.ps
