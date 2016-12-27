@@ -2540,7 +2540,7 @@ def findOfftargetsBwa(queue, batchId, batchBase, faFname, genome, pam, bedFname)
     seqLen = GUIDELEN
 
     bwaM = MFAC*MAXOCC # -m is queue size in bwa
-    cmd = "$BIN/bwa aln -o 0 -m %(bwaM)s -n %(maxDiff)d -k %(maxDiff)d -N -l %(seqLen)d %(genomeDir)s/%(genome)s/%(genome)s.fa %(faFname)s > %(saFname)s" % locals()
+    cmd = "$BIN/bwa aln -o 2 -m %(bwaM)s -n %(maxDiff)d -k %(maxDiff)d -N -l %(seqLen)d %(genomeDir)s/%(genome)s/%(genome)s.fa %(faFname)s > %(saFname)s" % locals()
     runCmd(cmd)
 
     queue.startStep(batchId, "saiToBed", convertMsg)
@@ -2559,7 +2559,7 @@ def findOfftargetsBwa(queue, batchId, batchBase, faFname, genome, pam, bedFname)
     # EXTRACTION OF SEQUENCES + ANNOTATION
     # twoBitToFa was 15x slower than python's twobitreader, after markd's fix it should be OK
     cmd = "$BIN/twoBitToFa %(genomeDir)s/%(genome)s/%(genome)s.2bit stdout -bed=%(matchesBedFname)s | $SCRIPT/filterFaToBed %(faFname)s %(pam)s %(altPats)s %(altPamMinScore)s %(maxOcc)d > %(filtMatchesBedFname)s" % locals()
-    #cmd = "$SCRIPT/twoBitToFaPython %(genomeDir)s/%(genome)s/%(genome)s.2bit %(matchesBedFname)s | $SCRIPT/filterFaToBed %(faFname)s %(pam)s %(altPats)s %(altPamMinScore)s %(maxOcc)d > %(filtMatchesBedFname)s" % locals()
+    cmd = "$SCRIPT/twoBitToFaPythonindel %(genomeDir)s/%(genome)s/%(genome)s.2bit %(matchesBedFname)s | $SCRIPT/filterFaToBed %(faFname)s %(pam)s %(altPats)s %(altPamMinScore)s %(maxOcc)d > %(filtMatchesBedFname)s" % locals()
     runCmd(cmd)
 
     segFname = "%(genomeDir)s/%(genome)s/%(genome)s.segments.bed" % locals()
